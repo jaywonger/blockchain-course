@@ -11,3 +11,4 @@ Summary
 
 DAOs - decentralized autonomous organizations - do all goverence on chain
 
+Hash - A unique fixed length string, meant to identify a piece of data. They are created by placing said data into a "hash function"
