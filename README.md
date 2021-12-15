@@ -21,15 +21,18 @@ Block - a list of transactions mined together
       - Nonce: a "number used once" to find the "solution" to the blockchain problem (it's also used to define the transaction number fo an account/address)
       - to mine a block it needs to make the hash start with 4 zeroes 
       - nonce is the solution to the problem
+
 Blockchain - multiple blocks
            - block, nonce, data, prev, and hash
            - genesis block: the first block in a blockchain
            - prev hash is used to solve the next block in a blockchain
            - basically a decentralized database
+
 Distributed Blockchain - multiple blockchain
                        - each node is running a blockchain has the exact same power as anyone else
                        - new data introduced to a block creates a fork in the blockchain
                        - majority rules in a blockchain
+
 Tokens - distribution of tokens is based on distributed blockchain
        - the more input power the more output amount of tokens
        - how to know if correct tokens are sent (private keys!)
@@ -38,6 +41,7 @@ Hash Algorithm - A function that computes data into a unique hash
 Mining - the process of finding the "solution" to the blockchain "problem".
 In our eaxmple, the "problem" was to find a hash that starts with four zeroes.
 Nodes get paid for mining blocks.
+
 Decentralized: having no single point of authority
 
 Public Key: is dereived from your private key. Anyone can "see" it, and use it to verify that a transaction came from you.
