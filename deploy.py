@@ -60,7 +60,7 @@ transaction = SimpleStorage.constructor().buildTransaction(
     {"chainId": chain_id, "from": my_address, "nonce": nonce}
 )
 signed_txn = w3.eth.account.sign_transaction(transaction, private_key=private_key)
-<<<<<<< HEAD
+
 # Send this signed transaction
 tx_hash = w3.eth.send_raw_transaction(signed_txn.rawTransaction)
 tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
@@ -71,6 +71,3 @@ tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
 simple_storage = w3.eth.contract(address=tx_receipt.ContractAddress, abi=abi)
 # Call -> Simulate making the call and getting a return value
 # Transact -> Actually make a state change
-=======
-print(signed_txn)
->>>>>>> f5d270fb7ef8f28da5bd050425c05f286f3d813f
