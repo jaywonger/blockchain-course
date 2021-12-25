@@ -5,6 +5,7 @@ def read_contract():
     # go take the index thats one less than the length
     # ABI
     # Address
+    print(simple_storage.retrieve())
 
 def main():
     read_contract()
