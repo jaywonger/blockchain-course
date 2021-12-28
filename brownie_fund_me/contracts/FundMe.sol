@@ -40,6 +40,14 @@ contract FundMe {
         uint256 ethAmountInUsd = (ethPrice * ethAmount) / 1000000000000000000;
         return ethAmountInUsd;
     }
+
+    function getEntranceFee() public view returns (uint256) {
+        // mimimumUSD
+        uint256 mimimumUSD = 50 * 10**18;
+        uint256 price = getPrice();
+        uint256 precision = 1 * 10**18;
+        return (mimimumUSD * precision) / price;
+    }
     
     modifier onlyOwner {
         require(msg.sender == owner);
