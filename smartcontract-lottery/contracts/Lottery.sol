@@ -44,6 +44,18 @@ contract Lottery is Ownable {
         require(lottery_state == LOTTERY_STATE.CLOSED, "Can't start a new lottery yet!");
         lottery_state = LOTTERY_STATE.OPEN;
     }
-    function endLottery() public {}
+
+    function endLottery() public onlyOwner {
+        // uint256(
+        //     keccak256(
+        //         abi.encodePacked(
+        //             nonce,  // nonce is predictable (aka, transaction number)
+        //             msg.sender,     // msg.sender is predictable 
+        //             block.difficulty, // can actually be manipulated by the miners
+        //             block.timestamp // timestamp is predictable
+        //         )
+        //     )
+        // ) % players.length; 
+    }
 
 }
