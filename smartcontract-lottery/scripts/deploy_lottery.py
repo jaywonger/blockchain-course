@@ -15,6 +15,29 @@ def deploy_lottery():
     print("Deployed lottery!")
     return lottery
 
+def start_lottery():
+    account = get_account()
+    lottery = Lottery[-1]
+    starting_tx = lottery.startLottery({"from": account})
+    starting_tx.wait(1)
+    print("The lottery is started!")
+
+def enter_lottery():
+    account = get_account()
+    lottery = Lottery[-1]
+    value = lottery.getEntranceFee() + 100000000
+    tx = lottery.enter({"from": account, "value": value})
+    tx.wait(1)
+    print("You entered the lottery!")
+
+def end_lottery():
+    account = get_account()
+    lottery = Lottery[-1]
+    # fund the contract
+    # then end the lottery
+    
 
 def main():
     deploy_lottery()
+    start_lottery()
+    enter_lottery()
