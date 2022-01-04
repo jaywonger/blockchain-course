@@ -8,7 +8,6 @@ LOCAL_BLOCKCHAIN_ENVIRONMENTS = [
     "mainnet-fork",
 ]
 
-
 def get_account(index=None, id=None):
     if index:
         return accounts[index]
