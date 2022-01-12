@@ -10,6 +10,13 @@ def main():
     # ABI
     # Address
     lending_pool = get_lending_pool()
+    # Approve sending out ERC20 tokens
+    # approve_erc20()
+
+def approve_erc20():
+    # ABI
+    # Address
+    
 
 def get_lending_pool():
     lending_pool_addresses_provider = interface.ILendingPoolAddressesProvider(
