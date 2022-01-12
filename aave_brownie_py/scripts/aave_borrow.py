@@ -12,9 +12,11 @@ def main():
     lending_pool = get_lending_pool()
 
 def get_lending_pool():
-    # ABI
-    # Address
     lending_pool_addresses_provider = interface.ILendingPoolAddressesProvider(
         config["networks"][network.show_active()]["lending_pool_addresses_provider"]
     )
     lending_pool_address = lending_pool_addresses_provider.getLendingPool()
+    # ABI
+    # Address - Check
+    lending_pool = interface.ILendingPool(lending_pool_address)
+    return lending_pool
