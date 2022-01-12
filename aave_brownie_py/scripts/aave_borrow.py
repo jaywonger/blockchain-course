@@ -26,24 +26,51 @@ def main():
     borrowable_eth, total_debt = get_borrowable_data(lending_pool, account)
     print("Let's borrow!")
     # DAI in terms of ETH
-    dai_eth_price = get_asset_price(config["networks"][network.show_active()]["dai_eth_price_feed"])
+    dai_eth_price = get_asset_price(
+        config["networks"][network.show_active()]["dai_eth_price_feed"]
+    )
+    amount_dai_to_borrow = (1 / dai_eth_price) * (borrowable_eth * 0.95)
+    # borrowable_eth -> borrowable_dai * 95%\
+    print(f"We are going to borrow {amount_dai_to_borrow} DAI")
+    # Now we will borrow!
+    dai_address = config["networks"][network.show_active()]["dai_token"]
+    borrow_tx = lending_pool.borrow(
+        dai_address,
+        Web3.toWei(amount_dai_to_borrow, "ether"),
+        1,
+        0,
+        account.address,
+        {"from": account},
+    )
+    borrow_tx.wait(1)
+    print("We borrowed some DAI!")
+    get_borrowable_data(lending_pool, account)
+    repay_all(amount, lending_pool, account)
+    print("You just deposited, borrowed, and repayed with Aave, Brownie and Chainlink!")
+
+def repay_all(amount, lending_pool, account):
+    approve_erc20(Web3.toWei(amount, "ether"), lending_pool, config["networks"][network.show_active()]["dai_token"], account,)
+    repay_tx = lending_pool.repay(config["networks"][network.show_active()]["dai_token"], amount, 1, account.address, {"from": account},)
+    repay_tx.wait(1)
+    print("Repaid!")
 
 def get_asset_price(price_feed_address):
     # ABI
     # Address
     dai_eth_price_feed = interface.AggregatorV3Interface(price_feed_address)
     latest_price = dai_eth_price_feed.latestRoundData()[1]
-    print(f"The DAI/ETH price is {latest_price}")
+    convert_latest_price = Web3.fromWei(latest_price, "ether")
+    print(f"The DAI/ETH price is {convert_latest_price}")
     return (float(latest_price))
     
 
 def get_borrowable_data(lending_pool, account):
     (
-        total_collateral_eth, 
-        total_debt_eth, 
-        available_borrow_eth, 
-        current_liquidation_threshold, 
-        ltv, 
+        total_collateral_eth,
+        total_debt_eth,
+        available_borrow_eth,
+        current_liquidation_threshold,
+        ltv,
         health_factor,
     ) = lending_pool.getUserAccountData(account.address)
     available_borrow_eth = Web3.fromWei(available_borrow_eth, "ether")
