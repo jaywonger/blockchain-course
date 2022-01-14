@@ -45,7 +45,7 @@ def main():
     borrow_tx.wait(1)
     print("We borrowed some DAI!")
     get_borrowable_data(lending_pool, account)
-    repay_all(amount, lending_pool, account)
+    #repay_all(amount, lending_pool, account)
     print("You just deposited, borrowed, and repayed with Aave, Brownie and Chainlink!")
 
 def repay_all(amount, lending_pool, account):
@@ -61,7 +61,7 @@ def get_asset_price(price_feed_address):
     latest_price = dai_eth_price_feed.latestRoundData()[1]
     convert_latest_price = Web3.fromWei(latest_price, "ether")
     print(f"The DAI/ETH price is {convert_latest_price}")
-    return (float(latest_price))
+    return (float(convert_latest_price))
     
 
 def get_borrowable_data(lending_pool, account):
